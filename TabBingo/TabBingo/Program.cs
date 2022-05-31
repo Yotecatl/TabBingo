@@ -21,6 +21,8 @@ int b = 0;                        // variable auxiliar indice del vector b
 int[] vector = new int[largoV];    //vector numeros aleatorios
 int[] numeros = new int[largoB];   //vector para llenar la matriz
 
+int[,] carton = new int[filas, columnas]; // matriz carton bingo
+
 //Se crea un vector con los valores para llenar la matriz 
 
 int numero = 0;
@@ -375,13 +377,36 @@ for (int j = 0; j < filas - 1; j++)
 
 
 //Mostar datos salida
-for (int i = 0; i < vector.Length; i++)
-{
-	Console.Write($"{vector[i]} ");
-}
-Console.WriteLine("");
+//for (int i = 0; i < vector.Length; i++)
+//{
+//	Console.Write($"{vector[i]} ");
+//}
+//Console.WriteLine("");
 for (int i = 0; i < numeros.Length; i++)
 {
 	Console.Write($"{numeros[i]} ");
 }
 Console.WriteLine("");
+
+//Generar la matriz
+
+b =0;
+for (int i = 0; i < filas; i++)
+{
+	for(int j = 0; j < columnas; j++)
+	{
+		carton[i, j] = numeros[b];
+		b++;
+	}
+}
+
+//Mostrar carton
+for (int i = 0; i < filas; i++)
+{
+	for (int j = 0; j < columnas; j++)
+	{
+		Console.Write($"{carton[i, j]} ");
+	}
+	Console.WriteLine();
+}
+
