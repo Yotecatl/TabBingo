@@ -391,14 +391,43 @@ Console.WriteLine("");
 //Generar la matriz
 
 b =0;
-for (int i = 0; i < filas; i++)
+for (int j = 0; j < columnas; j++)
 {
-	for(int j = 0; j < columnas; j++)
+	for(int i = 0; i < filas; i++)
 	{
 		carton[i, j] = numeros[b];
 		b++;
 	}
 }
+
+//Colocamos 0 donde iran los espacios en las 2 primeras filas
+
+int numEspacios = 4;
+
+
+for (int i = 0; i < filas - 1; i++)
+{
+	while(numEspacios > 0)
+	{
+		for (int j = 0; j < columnas; j++)
+		{
+
+			int volado = aleatorio.Next(1, 9);
+			if (volado < 6)
+			{
+				carton[i, j] = 0;
+				numEspacios--;
+			}
+			
+			if (numEspacios == 0)
+			{
+				j = columnas;
+			}
+		}
+	}
+	numEspacios = 4;
+}
+
 
 //Mostrar carton
 for (int i = 0; i < filas; i++)
