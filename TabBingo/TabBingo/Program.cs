@@ -382,11 +382,12 @@ for (int j = 0; j < filas - 1; j++)
 //	Console.Write($"{vector[i]} ");
 //}
 //Console.WriteLine("");
-for (int i = 0; i < numeros.Length; i++)
-{
-	Console.Write($"{numeros[i]} ");
-}
-Console.WriteLine("");
+// Mostrar vector numeros
+//for (int i = 0; i < numeros.Length; i++)
+//{
+//	Console.Write($"{numeros[i]} ");
+//}
+//Console.WriteLine("");
 
 //Generar la matriz
 
@@ -428,14 +429,96 @@ for (int i = 0; i < filas - 1; i++)
 	numEspacios = 4;
 }
 
+// Agramanos los 0 en la ultima columna respetando maximo 2 espacios por filado
 
-//Mostrar carton
+// Primero agregamos 0 a los columnas de tres números
+numEspacios = 4;
+for(int j = 0; j < columnas; j++)
+{
+	for(int i = 0; i < filas; i++)
+	{
+		if(carton[i, j] != 0 && carton[i+1,j] != 0)
+		{
+			carton[i+2, j] = 0;
+			i = filas;
+			numEspacios--;
+		}
+		else { i = filas; }
+	}
+}
+//Console.WriteLine(numEspacios); //Mostrar los espacios que faltan
+
+//Mostrar carton con ceros sin formato y falta la ultima fila de 0s 
+//for (int i = 0; i < filas; i++)
+//{
+//	for (int j = 0; j < columnas; j++)
+//	{
+//		Console.Write($"{carton[i, j]} ");
+//	}
+//	Console.WriteLine();
+//}
+
+// Ponemos los 0 que nos falten
+while (numEspacios > 0)
+{
+	for (int j = 0; j < columnas; j++)
+	{
+		for (int i = 0; i < filas; i++)
+		{
+			if (carton[i,j] != 0 && carton[i+1,j] == 0 || carton[i, j] == 0 && carton[i + 1, j] != 0)
+			{
+				int volado = aleatorio.Next(1, 9);
+				if (volado > 4)
+				{
+					carton[i + 2, j] = 0;
+					numEspacios--;
+					if (numEspacios == 0)
+					{
+						break;
+					}
+				}
+				else { i = filas; }
+
+			}
+			else { i = filas; }
+		}
+		if (numEspacios == 0)
+		{
+			break;
+		}
+
+	}
+}
+
+
+//Mostrar carton con formato
+
+Console.WriteLine("----------------------------");
 for (int i = 0; i < filas; i++)
 {
 	for (int j = 0; j < columnas; j++)
 	{
-		Console.Write($"{carton[i, j]} ");
+		if (carton[i, j] == 0)
+		{
+			Console.Write("|  ");
+		}
+		else
+		{
+			if (i < filas && j == 0)
+			{
+				Console.Write($"|0{carton[i, j]}");
+			}
+			else
+			{
+				Console.Write($"|{carton[i, j]}");
+			}
+		}
 	}
-	Console.WriteLine();
+	Console.WriteLine("|");
+	//Console.WriteLine();
 }
+
+Console.WriteLine("----------------------------");
+
+
 
